@@ -25,7 +25,7 @@ project "OpenGLBoilerPlate"
     targetdir "bin/%{cfg.buildcfg}"
     objdir "obj/%{cfg.buildcfg}"
 
-    includedirs { "include/", "libs/glad/include/" }
+    includedirs { "include/", "libs/glad/include/", "libs/glfw/include/", "libs/glm/" }
     
     files { "src/main.cpp" }
 

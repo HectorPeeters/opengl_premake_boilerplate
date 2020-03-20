@@ -5,3 +5,9 @@ Makefile
 libs/Makefile
 
 **/*.make
+
+**/*.sln
+**/*.vcxproj
+**/*.vcxproj.user
+**/*.vcxproj.filters
+.vs/
