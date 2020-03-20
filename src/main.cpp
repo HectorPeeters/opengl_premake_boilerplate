@@ -13,7 +13,8 @@ int main()
         fprintf(stderr, "Failed to init GLFW\n");
         return 1;
     }
-    
+
+    printf("GLFW version: %s\n", glfwGetVersionString());
 
     GLFWwindow *window = glfwCreateWindow(500, 300, "Window Title", NULL, NULL);
 
@@ -30,6 +31,8 @@ int main()
         fprintf(stderr, "Failed to init GLAD\n");
         return 1;
     }
+
+    printf("OpenGL version: %s\n", glGetString(GL_VERSION));
 
     while (!glfwWindowShouldClose(window))
     {
