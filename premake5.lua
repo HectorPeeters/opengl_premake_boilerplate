@@ -15,6 +15,7 @@ workspace "OpenGLBoilerPlate"
 include "libs/glfw.lua"
 include "libs/glad.lua"
 include "libs/glm.lua"
+include "libs/imgui.lua"
 
 project "OpenGLBoilerPlate"
     kind "ConsoleApp"
@@ -25,11 +26,11 @@ project "OpenGLBoilerPlate"
     targetdir "bin/%{cfg.buildcfg}"
     objdir "obj/%{cfg.buildcfg}"
 
-    includedirs { "include/", "libs/glad/include/", "libs/glfw/include/", "libs/glm/" }
+    includedirs { "include/", "libs/glad/include/", "libs/glfw/include/", "libs/glm/", "libs/imgui/", "libs/imgui/examples" }
     
     files { "src/main.cpp" }
 
-    links { "GLFW", "GLM", "GLAD" }
+    links { "GLFW", "GLM", "GLAD", "ImGui" }
 
     filter "system:linux"
         links { "dl", "pthread" }
