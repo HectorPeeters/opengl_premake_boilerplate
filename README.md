@@ -8,7 +8,7 @@ It provides the 'engine.h' header file which imports the libraries and there is 
 Since this project builds all libraries from source and includes these as submodules, don't forget to clone the project recursively.
 
 ### Prerequisites
-You will need premake5 to build this project. Download it [HERE].(https://premake.github.io/download.html#v5)
+You will need premake5 to build this project. Download it [HERE](https://premake.github.io/download/html#v5).
 
 
 ### Building
