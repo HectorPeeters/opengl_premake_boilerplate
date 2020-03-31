@@ -12,11 +12,6 @@ workspace "OpenGLBoilerPlate"
         optimize "Speed"
         flags { "LinkTimeOptimization" }
 
-include "libs/glfw.lua"
-include "libs/glad.lua"
-include "libs/glm.lua"
-include "libs/imgui.lua"
-
 project "OpenGLBoilerPlate"
     kind "ConsoleApp"
     language "C++"
@@ -39,3 +34,8 @@ project "OpenGLBoilerPlate"
 
     filter "system:windows"
         defines { "_WINDOWS" }
+
+include "libs/glfw.lua"
+include "libs/glad.lua"
+include "libs/glm.lua"
+include "libs/imgui.lua"

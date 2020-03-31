@@ -6,7 +6,7 @@ project "ImGui"
 	targetdir "../bin/%{cfg.buildcfg}"
 	objdir "../obj/%{cfg.buildcfg}"
 	
-	includedirs { "imgui/", "imgui/examples/", "glad/include" }
+	includedirs { "imgui/", "imgui/examples/", "glad/include", "glfw/include/" }
 
 	files
 	{
