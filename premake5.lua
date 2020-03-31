@@ -1,5 +1,6 @@
 workspace "OpenGLBoilerPlate"
     configurations { "Debug", "Release" }
+    startproject "OpenGLBoilerPlate"
 
     flags { "MultiProcessorCompile" }
 
