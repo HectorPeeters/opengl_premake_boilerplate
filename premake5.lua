@@ -23,7 +23,7 @@ project "OpenGLBoilerPlate"
 
     includedirs { "include/", "libs/glad/include/", "libs/glfw/include/", "libs/glm/", "libs/imgui/", "libs/imgui/examples" }
     
-    files { "src/main.cpp" }
+    files { "src/*.cpp" }
 
     links { "GLFW", "GLM", "GLAD", "ImGui" }
 

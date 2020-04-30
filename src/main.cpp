@@ -1,10 +1,11 @@
 #include <stdio.h>
 
 #include "engine.h"
+#include "shader.h"
+#include "gl_utils.h"
 
 int main()
 {
-
     glm::vec3 vector(1, 0, 1);
     printf("%f %f %f\n", vector.x, vector.y, vector.z);
 
@@ -40,6 +41,29 @@ int main()
 
     glfwSwapInterval(1);
 
+    // Setup model
+
+    float vertices[] = {
+        -0.5f, -0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,
+        0.0f, 0.5f, 0.0f
+    };
+
+    unsigned int vao;
+    GL(glGenVertexArrays(1, &vao));
+    GL(glBindVertexArray(vao));
+    unsigned int vbo;
+    GL(glGenBuffers(1, &vbo));
+    GL(glBindBuffer(GL_ARRAY_BUFFER, vbo));
+    GL(glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW));
+
+    GL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0));
+    GL(glEnableVertexAttribArray(0));
+
+    Shader shader("Basic", "res/basic.vert", "res/basic.frag");
+
+    // Setup ImGui
+
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
 
@@ -54,6 +78,13 @@ int main()
     {
         glfwPollEvents();
 
+        glClear(GL_COLOR_BUFFER_BIT);
+
+        shader.Bind();
+        GL(glBindVertexArray(vao));
+        GL(glDrawArrays(GL_TRIANGLES, 0, 3));
+        shader.Unbind();
+
         ImGui_ImplOpenGL3_NewFrame();
         ImGui_ImplGlfw_NewFrame();
         ImGui::NewFrame();
@@ -65,11 +96,12 @@ int main()
         int display_w, display_h;
         glfwGetFramebufferSize(window, &display_w, &display_h);
         glViewport(0, 0, display_w, display_h);
-        glClear(GL_COLOR_BUFFER_BIT);
         ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         glfwSwapBuffers(window);
     }
+
+    shader.Delete();
 
     glfwTerminate();
 }
