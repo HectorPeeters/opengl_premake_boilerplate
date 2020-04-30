@@ -9,8 +9,8 @@
 #include "engine.h"
 #include "gl_utils.h"
 
-Shader::Shader(const char *name)
-    : m_Name(name)
+Shader::Shader(const char *name, const char *vertexPath, const char *fragmentPath)
+    : m_Name(name), m_VertexPath(vertexPath), m_FragmentPath(fragmentPath)
 {
 }
 
@@ -20,7 +20,7 @@ Shader::~Shader()
         Delete();
 }
 
-bool Shader::Create(const char *vertexPath, const char *fragmentPath)
+bool Shader::Create()
 {
     std::string vertexSource;
     std::string fragmentSource;
@@ -32,8 +32,8 @@ bool Shader::Create(const char *vertexPath, const char *fragmentPath)
 
     try
     {
-        vertexStream.open(vertexPath);
-        fragmentStream.open(fragmentPath);
+        vertexStream.open(m_VertexPath);
+        fragmentStream.open(m_FragmentPath);
         std::stringstream vertexStringStream, fragmentStringStream;
 
         vertexStringStream << vertexStream.rdbuf();
