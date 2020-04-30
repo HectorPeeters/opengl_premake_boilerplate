@@ -11,7 +11,7 @@ public:
     ~Shader();
 
     bool Create();
-    void Delete();
+    void Destroy();
 
     void Bind();
     void Unbind();

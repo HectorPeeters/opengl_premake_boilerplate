@@ -17,7 +17,7 @@ Shader::Shader(const char *name, const char *vertexPath, const char *fragmentPat
 Shader::~Shader()
 {
     if (m_ProgramId != -1)
-        Delete();
+        Destroy();
 }
 
 bool Shader::Create()
@@ -97,7 +97,7 @@ bool Shader::Create()
     return true;
 }
 
-void Shader::Delete()
+void Shader::Destroy()
 {
     Unbind();
     GL(glDeleteProgram(m_ProgramId));

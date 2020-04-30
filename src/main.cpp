@@ -68,7 +68,7 @@ int main()
         window.Update();
     }
 
-    shader.Delete();
+    shader.Destroy();
 
     window.Destroy();
 }
