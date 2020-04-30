@@ -162,6 +162,12 @@ void Shader::Uniform4i(const char *name, glm::ivec4 &value)
     GL(glUniform4i(location, value.x, value.y, value.z, value.w));
 }
 
+void Shader::UniformMat4(const char *name, glm::mat4 &value)
+{
+    unsigned int location = m_Uniforms[name];
+    GL(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value)));
+}
+
 unsigned int Shader::CreateShader(const char *name, const char *source, unsigned int type)
 {
     unsigned int id;

@@ -99,6 +99,11 @@ GLFWwindow *Window::GetGlfwWindow()
     return m_Window;
 }
 
+WindowData *Window::GetDataPointer()
+{
+    return &m_Data;
+}
+
 glm::ivec2 Window::GetSize()
 {
     return {m_Data.width, m_Data.height};

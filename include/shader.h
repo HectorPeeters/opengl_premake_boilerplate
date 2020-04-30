@@ -26,6 +26,8 @@ public:
     void Uniform3i(const char *name, glm::ivec3 &value);
     void Uniform4i(const char *name, glm::ivec4 &value);
 
+    void UniformMat4(const char *name, glm::mat4 &value);
+
 private:
     int m_ProgramId;
 

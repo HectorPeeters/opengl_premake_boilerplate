@@ -26,6 +26,7 @@ public:
     void SetVsync(bool vsync);
 
     GLFWwindow *GetGlfwWindow();
+    WindowData *GetDataPointer();
 
     glm::ivec2 GetSize();
 
