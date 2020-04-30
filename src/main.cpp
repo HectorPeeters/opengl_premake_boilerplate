@@ -60,7 +60,9 @@ int main()
     GL(glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0));
     GL(glEnableVertexAttribArray(0));
 
-    Shader shader("Basic", "res/basic.vert", "res/basic.frag");
+    Shader shader("Basic");
+    if (!shader.Create("res/basic.vert", "res/basic.frag"))
+        return 1;
 
     // Setup ImGui
 

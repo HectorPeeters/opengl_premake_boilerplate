@@ -9,8 +9,18 @@
 #include "engine.h"
 #include "gl_utils.h"
 
-Shader::Shader(const char *name, const char *vertexPath, const char *fragmentPath)
+Shader::Shader(const char *name)
     : m_Name(name)
+{
+}
+
+Shader::~Shader()
+{
+    if (m_ProgramId != -1)
+        Delete();
+}
+
+bool Shader::Create(const char *vertexPath, const char *fragmentPath)
 {
     std::string vertexSource;
     std::string fragmentSource;
@@ -37,13 +47,18 @@ Shader::Shader(const char *name, const char *vertexPath, const char *fragmentPat
     }
     catch (std::ifstream::failure e)
     {
-        fprintf(stderr, "Shader Error: Failed to load shader '%s'\n", name);
+        fprintf(stderr, "Shader Error: Failed to load shader '%s'\n", m_Name.c_str());
+        return false;
     }
 
     GL(m_ProgramId = glCreateProgram());
 
-    unsigned int vertexId = CreateShader(name, vertexSource.c_str(), GL_VERTEX_SHADER);
-    unsigned int fragmentId = CreateShader(name, fragmentSource.c_str(), GL_FRAGMENT_SHADER);
+    unsigned int vertexId = CreateShader(m_Name.c_str(), vertexSource.c_str(), GL_VERTEX_SHADER);
+    if (vertexId == -1)
+        return false;
+    unsigned int fragmentId = CreateShader(m_Name.c_str(), fragmentSource.c_str(), GL_FRAGMENT_SHADER);
+    if (fragmentId == -1)
+        return false;
 
     GL(glAttachShader(m_ProgramId, vertexId));
     GL(glAttachShader(m_ProgramId, fragmentId));
@@ -56,7 +71,8 @@ Shader::Shader(const char *name, const char *vertexPath, const char *fragmentPat
     if (!success)
     {
         GL(glGetShaderInfoLog(m_ProgramId, 512, NULL, infoLog));
-        fprintf(stderr, "Shader Error: Failed to link shader program '%s': \n%s\n", name, infoLog);
+        fprintf(stderr, "Shader Error: Failed to link shader program '%s': \n%s\n", m_Name.c_str(), infoLog);
+        return false;
     }
 
     GL(glDeleteShader(vertexId));
@@ -77,37 +93,8 @@ Shader::Shader(const char *name, const char *vertexPath, const char *fragmentPat
         m_Uniforms.insert(std::pair<const char *, unsigned int>(name, uniformLocation));
     }
 
-    printf("Loaded shader program '%s', uniforms: %d\n", name, uniformCount);
-}
-
-unsigned int Shader::CreateShader(const char *name, const char *source, unsigned int type)
-{
-    unsigned int id;
-
-    GL(id = glCreateShader(type));
-    GL(glShaderSource(id, 1, &source, NULL));
-    GL(glCompileShader(id));
-
-    char infoLog[512];
-
-    int success;
-    GL(glGetShaderiv(id, GL_COMPILE_STATUS, &success));
-    if (!success)
-    {
-        GL(glGetShaderInfoLog(id, 512, NULL, infoLog));
-        fprintf(stderr, "Shader Error: Failed to compile shader '%s': \n%s\n", name, infoLog);
-        return -1;
-    }
-
-    printf("Loaded %s shader '%s'\n", type == 35633 ? "vertex" : "fragment", name);
-
-    return id;
-}
-
-Shader::~Shader()
-{
-    if (m_ProgramId != -1)
-        Delete();
+    printf("Loaded shader program '%s', uniforms: %d\n", m_Name.c_str(), uniformCount);
+    return true;
 }
 
 void Shader::Delete()
@@ -173,4 +160,28 @@ void Shader::Uniform4i(const char *name, glm::ivec4 &value)
 {
     unsigned int location = m_Uniforms[name];
     GL(glUniform4i(location, value.x, value.y, value.z, value.w));
+}
+
+unsigned int Shader::CreateShader(const char *name, const char *source, unsigned int type)
+{
+    unsigned int id;
+
+    GL(id = glCreateShader(type));
+    GL(glShaderSource(id, 1, &source, NULL));
+    GL(glCompileShader(id));
+
+    char infoLog[512];
+
+    int success;
+    GL(glGetShaderiv(id, GL_COMPILE_STATUS, &success));
+    if (!success)
+    {
+        GL(glGetShaderInfoLog(id, 512, NULL, infoLog));
+        fprintf(stderr, "Shader Error: Failed to compile shader '%s': \n%s\n", name, infoLog);
+        return -1;
+    }
+
+    printf("Loaded %s shader '%s'\n", type == 35633 ? "vertex" : "fragment", name);
+
+    return id;
 }

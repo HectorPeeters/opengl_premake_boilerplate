@@ -7,9 +7,10 @@
 class Shader
 {
 public:
-    Shader(const char* name, const char* vertexPath, const char* fragmentPath);
+    Shader(const char* name);
     ~Shader();
 
+    bool Create(const char* vertexPath, const char* fragmentPath);
     void Delete();
 
     void Bind();
