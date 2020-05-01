@@ -114,55 +114,55 @@ void Shader::Unbind()
     GL(glUseProgram(0));
 }
 
-void Shader::Uniform1f(const char *name, float value)
+void Shader::Uniform1f(std::string name, float value)
 {
     unsigned int location = m_Uniforms[name];
     GL(glUniform1f(location, value));
 }
 
-void Shader::Uniform2f(const char *name, glm::vec2 &value)
+void Shader::Uniform2f(std::string name, glm::vec2 &value)
 {
     unsigned int location = m_Uniforms[name];
     GL(glUniform2f(location, value.x, value.y));
 }
 
-void Shader::Uniform3f(const char *name, glm::vec3 &value)
+void Shader::Uniform3f(std::string name, glm::vec3 &value)
 {
     unsigned int location = m_Uniforms[name];
     GL(glUniform3f(location, value.x, value.y, value.z));
 }
 
-void Shader::Uniform4f(const char *name, glm::vec4 &value)
+void Shader::Uniform4f(std::string name, glm::vec4 &value)
 {
     unsigned int location = m_Uniforms[name];
     GL(glUniform4f(location, value.x, value.y, value.z, value.w));
 }
 
-void Shader::Uniform1i(const char *name, int value)
+void Shader::Uniform1i(std::string name, int value)
 {
     unsigned int location = m_Uniforms[name];
     GL(glUniform1i(location, value));
 }
 
-void Shader::Uniform2i(const char *name, glm::ivec2 &value)
+void Shader::Uniform2i(std::string name, glm::ivec2 &value)
 {
     unsigned int location = m_Uniforms[name];
     GL(glUniform2i(location, value.x, value.y));
 }
 
-void Shader::Uniform3i(const char *name, glm::ivec3 &value)
+void Shader::Uniform3i(std::string name, glm::ivec3 &value)
 {
     unsigned int location = m_Uniforms[name];
     GL(glUniform3i(location, value.x, value.y, value.z));
 }
 
-void Shader::Uniform4i(const char *name, glm::ivec4 &value)
+void Shader::Uniform4i(std::string name, glm::ivec4 &value)
 {
     unsigned int location = m_Uniforms[name];
     GL(glUniform4i(location, value.x, value.y, value.z, value.w));
 }
 
-void Shader::UniformMat4(const char *name, glm::mat4 &value)
+void Shader::UniformMat4(std::string name, glm::mat4 &value)
 {
     unsigned int location = m_Uniforms[name];
     GL(glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value)));
