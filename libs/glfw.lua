@@ -18,7 +18,12 @@ project "GLFW"
 		"glfw/src/input.c",
 		"glfw/src/monitor.c",
 		"glfw/src/vulkan.c",
-		"glfw/src/window.c"
+		"glfw/src/window.c",
+		"glfw/src/platform.c",
+		"glfw/src/null_init.c",
+		"glfw/src/null_monitor.c",
+		"glfw/src/null_window.c",
+		"glfw/src/null_joystick.c"
 	}
     
 	filter "system:linux"
@@ -55,6 +60,7 @@ project "GLFW"
 			"glfw/src/win32_init.c",
 			"glfw/src/win32_joystick.c",
 			"glfw/src/win32_monitor.c",
+			"glfw/src/win32_module.c",
 			"glfw/src/win32_time.c",
 			"glfw/src/win32_thread.c",
 			"glfw/src/win32_window.c",
