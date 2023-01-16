@@ -44,7 +44,8 @@ project "GLFW"
 			"glfw/src/egl_context.c",
 			"glfw/src/osmesa_context.c",
 			"glfw/src/linux_joystick.c",
-			"glfw/src/posix_module.c"
+			"glfw/src/posix_module.c",
+			"glfw/src/posix_poll.c"
 		}
 
 		defines
