@@ -6,13 +6,13 @@ project "ImGui"
 	targetdir "../bin/%{cfg.buildcfg}"
 	objdir "../obj/%{cfg.buildcfg}"
 	
-	includedirs { "imgui/", "imgui/examples/", "glad/include", "glfw/include/" }
+	includedirs { "imgui/", "glad/include", "glfw/include/" }
 
 	files
 	{
 		"imgui/*.cpp",
-		"imgui/examples/imgui_impl_glfw.cpp",
-		"imgui/examples/imgui_impl_opengl3.cpp"
+		"imgui/backends/imgui_impl_glfw.cpp",
+		"imgui/backends/imgui_impl_opengl3.cpp"
 	}
 
 	defines 
